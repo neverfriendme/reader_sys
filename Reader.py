@@ -1,36 +1,38 @@
-# by neverfriendme
+import pathlib
+
 def func():
     extensions = (".cpp", ".hpp", ".h", ".cxx", ".hxx", ".py", ".pyc", ".pyd", ".pyo", ".pyw", ".pyx", ".pxd", ".pxi", ".pyzw", ".js", ".C", ".c")
-    Choices = ["read", "quit"]
-    choice = input("read to read the contents of a file or quit:\n").strip().lower()
-    if choice == Choices[0]:
+    choices = ["read", "quit"]
+
+    while True:
+        choice = input("read to read the contents of a file or quit:\n").strip().lower()
+        if choice not in choices:
+            print("Invalid input. Please try again.")
+            continue
+
+        if choice == "quit":
+            print("Quiting")
+            return
+
         directory = input("What is the file you want to open (Please input the directory correctly):\n")
-        if not directory.endswith(extensions):
+        file_path = pathlib.Path(directory)
+
+        if not file_path.suffix in extensions:
             warning = input("Are you sure? The file you are entering could contain malware.Y/N:").strip().upper()
-        if warning == "Y":
-            pass
-        elif warning == "N":
-            print("Quiting for your safety")
-            quit()
+            if warning != "Y":
+                print("Quiting for your safety")
+                return
+
         try:
-            with open(directory, "r") as file:
-                text = file.read()
-                print(text)
+            text = file_path.read_text()
+            print(text)
         except FileNotFoundError:
-            print("File was not found")
+            print(f"File '{directory}' not found")
         except PermissionError:
-            print("You don't have permission to read this file")
-        except IOError:
-            print("An error occurred while trying to read the file")
+            print(f"Permission denied for file '{directory}'")
+        except IOError as e:
+            print(f"Error reading file '{directory}': {e}")
         except Exception as e:
-            print("An unexpected error occurred:", str(e))
-    elif choice == Choices[1]:
-        print("Quiting")
-        return
-    else:
-        print("Invalid")
-        return
+            print(f"An unexpected error occurred: {e}")
 
 func()
-
-
