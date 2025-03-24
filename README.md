@@ -1,7 +1,6 @@
-# Safety measurements
-reader_sys is a software that reads .txt files and program files
-even though this may not make reader_sys special. reader_sys has many warnings.
-reader_sys doesn't have all program extensions on its warning but will have all.
+# Use it as you like.
+I just made it because I thought it would be fun.
+You can edit it if you like. Use it as you like. I don't really care what you do with it.
 # Dependencies
 Python
 link: https://www.python.org
