@@ -5,5 +5,4 @@ reader_sys doesn't have all program extensions on its warning but will have all.
 # Dependencies
 Python
 link: https://www.python.org
-# Copyright
-All rights reserved
+
